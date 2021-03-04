@@ -17,7 +17,73 @@
  * limitations under the License.
  */
 
-export default (input) => {
+
+const defaultMapping = {
+  'default' : 'Home',
+  'remap' : {
+    'launchpoint' : (val, deeplinkObj) =>  { val === 'section' ? deeplinkObj.sectionName : val }
+  },
+  'sections' :{
+      'home': '/pages/home',
+      'player': '/playingmodule',
+      'bla': () => {}
+  },
+  'inputVariables' : [
+    'query',
+    ['assetType', 'assetId'],
+    'entityId',
+  ]
+}
+
+export default (input, mapping) => {
+    //https://www.tvapp.com/x1?launchpoint=home&lmt=0&us_privacy=1-N-
+    input = {
+      'launchpoint' : 'home',
+      'lmt' : '0',
+      'us_privacy' : '1-N-'
+    }
+
+    // filter
+    Object.keys(input).reduce((key, acc) => {
+        const value = input[key]
+
+        if (key in mapping.remap) {
+          acc.section = mapping.remap[key](value, input) // function or string
+        }
+
+        if (section in mapping.sections) {
+          acc.path = mapping.section[section] // function check
+        }
+
+
+
+        // we cant map it so pass it along
+        acc.passthroughParams.push(value)
+    }, {
+       passthroughParams: [],
+       section: '', // home, player, setting,
+       page: '', // sectionName
+       pageId:
+    })
+
+
+    {
+      passThroughVariables: [],
+      path: [
+        'home'
+        ':assetId',
+        'xyz'
+      ]
+    }
+
+    // /home (:id)
+
+    // get input variables
+    if (mapping.inputVariables)
+      const inputVars = mapping.inputVariables.filter(i => {
+
+      })
+
     // do something with input
     return output
 }

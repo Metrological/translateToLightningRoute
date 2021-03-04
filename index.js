@@ -55,7 +55,7 @@ export default async (hashOrObject, config = {
 }) => {
 
   const deepLinkObject = await parse(hashOrObject, config.inputFormat)
-  const mappedDeeplinkObject = await translate(config.mapping, deepLinkObject)
+  const mappedDeeplinkObject = await translate(deepLinkObject, config.mapping)
   return await output(mappedDeeplinkObject, config.outputFormat)
 
 }
