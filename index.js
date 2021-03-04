@@ -44,7 +44,7 @@ const defaultMapping = {
 export default async (
   hashOrObject,
   config = {
-    inputFormat: 'hash',
+    inputFormat: 'querystring',
     outputFormat: 'url',
     mapping: { ...defaultMapping },
   }

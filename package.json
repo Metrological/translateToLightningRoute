@@ -4,7 +4,8 @@
   "description": "Translates routes to Lightning Routes",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r esm test/index.js"
+    "test": "mocha -r esm test/index.js",
+    "dev": "node -r esm dev.js"
   },
   "author": "",
   "license": "Apache",
@@ -15,6 +16,7 @@
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
+    "esm": "^3.2.25",
     "mocha": "^8.3.0",
     "prettier": "^2.2.1"
   }

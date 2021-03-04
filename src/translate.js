@@ -19,14 +19,14 @@
 
 export default (input, mapping) => {
   //https://www.tvapp.com/x1?launchpoint=home&lmt=0&us_privacy=1-N-
-  input = {
-    launchpoint: 'home',
-    lmt: '0',
-    us_privacy: '1-N-',
-  }
+  // input = {
+  //   launchpoint: 'home',
+  //   lmt: '0',
+  //   us_privacy: '1-N-',
+  // }
 
   return Object.keys(input).reduce(
-    (key, acc) => {
+    (acc, key) => {
       const value = input[key]
 
       if (key in mapping.remap) {
@@ -39,6 +39,8 @@ export default (input, mapping) => {
 
       // we cant map it so pass it along
       acc.passthroughParams.push(value)
+
+      return acc
     },
     {
       passthroughParams: [],
