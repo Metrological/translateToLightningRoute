@@ -21,8 +21,4 @@ import parse from './parse'
 import translate from './translate'
 import output from './output'
 
-export default {
-  parse,
-  translate,
-  output,
-}
+export { parse, translate, output }
