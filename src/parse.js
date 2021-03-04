@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-const getQueryStringParams = qs => {
+const getQueryStringParams = (qs) => {
   const getQuery = /([?&].*)/
   const matches = getQuery.exec(qs)
   const params = {}
@@ -32,9 +32,9 @@ const getQueryStringParams = qs => {
 }
 
 const formats = {
-  'querystring' : getQueryStringParams,
+  querystring: getQueryStringParams,
 }
 
 export default (input, format = 'querystring') => {
-  return formats[format] && typeof formats[format] === 'function' && formats[format](input) || {}
+  return (formats[format] && typeof formats[format] === 'function' && formats[format](input)) || {}
 }

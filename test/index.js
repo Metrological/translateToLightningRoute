@@ -27,9 +27,8 @@ import translate from '../src/translate'
 
 export default () => {
   describe('translate', () => {
-
     it('should translate XYZ', (done) => {
-      translate('?abc').then( resp => {
+      translate('?abc').then((resp) => {
         expect(resp).to.equal()
       })
     })

@@ -22,7 +22,7 @@ import translate from './translate'
 import output from './output'
 
 export default {
-    parse,
-    translate,
-    output
+  parse,
+  translate,
+  output,
 }

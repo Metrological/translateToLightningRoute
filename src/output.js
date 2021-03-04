@@ -18,6 +18,6 @@
  */
 
 export default (translatedObject, outputFormat) => {
-    // do something with input
-    return outputFormat
+  // do something with input
+  return outputFormat
 }
