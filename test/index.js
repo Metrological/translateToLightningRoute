@@ -17,20 +17,16 @@
  * limitations under the License.
  */
 
-import fs from 'fs'
-import path from 'path'
+// import { expect } from 'chai'
 
-import { expect } from 'chai'
-import sinon from 'sinon'
+// import translate from '../src/translate'
 
-import translate from '../src/translate'
-
-export default () => {
-  describe('translate', () => {
-    it('should translate XYZ', (done) => {
-      translate('?abc').then((resp) => {
-        expect(resp).to.equal()
-      })
-    })
-  })
-}
+// export default () => {
+//   describe('translate', () => {
+//     it('should translate XYZ', (done) => {
+//       translate('?abc').then((resp) => {
+//         expect(resp).to.equal()
+//       })
+//     })
+//   })
+// }
