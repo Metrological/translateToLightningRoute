@@ -19,7 +19,7 @@
 
 const constructHash = (input) => {
   const queryString = new URLSearchParams(input.queryParams).toString()
-  return (queryString ? '?' + queryString : '') + '#' + input.path
+  return encodeURI((queryString ? '?' + queryString : '') + '#' + input.path)
 }
 
 const formats = {
