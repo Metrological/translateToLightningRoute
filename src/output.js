@@ -17,6 +17,17 @@
  * limitations under the License.
  */
 
-export default (translatedObject, outputFormat) => {
-  return translatedObject
+const constructHash = (input) => {
+  const queryString = new URLSearchParams(input.queryParams).toString()
+  return (queryString ? '?' + queryString : '') + '#' + input.path
+}
+
+const formats = {
+  hash: constructHash,
+}
+
+export default (input, format = 'hash') => {
+  return (
+    (formats[format] && typeof formats[format] === 'function' && formats[format](input)) || input
+  )
 }

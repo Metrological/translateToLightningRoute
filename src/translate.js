@@ -17,47 +17,68 @@
  * limitations under the License.
  */
 
-export default (input, mapping) => {
-  //https://www.tvapp.com/x1?launchpoint=home&lmt=0&us_privacy=1-N-
-  // input = {
-  //   launchpoint: 'home',
-  //   lmt: '0',
-  //   us_privacy: '1-N-',
-  // }
+const defaultMapping = {
+  normalize: {
+    launchpoint: {
+      to: 'section',
+      fn: (val, deeplinkObj) => (val === 'section' ? deeplinkObj.sectionname : val),
+    },
+  },
+  pathKey: 'section',
+  paths: {
+    home: '/page/home',
+    detail: '/page/detail',
+    playback: '/page/player/:assetId',
+    search: '/search/:query?',
+  },
+  queryStringsToIgnore: ['section', 'sectionname'],
+}
 
+const normalizeInput = (input, mapping) => {
+  return Object.keys(input).reduce((acc, key) => {
+    const value = input[key]
+
+    if (key in mapping.normalize) {
+      acc[mapping.normalize[key].to] =
+        mapping.normalize[key].fn && typeof mapping.normalize[key].fn === 'function'
+          ? mapping.normalize[key].fn(value, input)
+          : value
+    } else {
+      acc[key] = value
+    }
+
+    return acc
+  }, {})
+}
+
+const remapInput = (input, mapping) => {
   return Object.keys(input).reduce(
-    (acc, key) => {
+    (acc, key, index, source) => {
       const value = input[key]
 
-      if (key in mapping.remap) {
-        acc.section = mapping.remap[key](value, input) // function or string
+      // eslint-disable-next-line
+      const regexp = new RegExp(':' + key + '\\??', 'g')
+      if (acc.path.indexOf(':' + key) > -1) {
+        acc.path = acc.path.replace(regexp, value)
+      } else if (mapping.queryStringsToIgnore.indexOf(key) === -1) {
+        acc.queryParams[key] = value
       }
 
-      if (acc.section in mapping.sections) {
-        acc.path = mapping.section[acc.section] // function check
+      if (index === source.length - 1) {
+        const hasPart = /\/:[^?/]+\?/g
+        acc.path = hasPart.test(acc.path) ? acc.path.replace(hasPart, '') : acc.path
       }
-
-      // we cant map it so pass it along
-      acc.passthroughParams.push(value)
 
       return acc
     },
     {
-      passthroughParams: [],
-      section: '', // home, player, setting,
-      page: '', // sectionName
-      pageId: '',
+      path: mapping.paths[input[mapping.pathKey] || 'default'] || '/',
+      queryParams: {},
     }
   )
+}
 
-  // {
-  //   passThroughVariables: [],
-  //   path: [
-  //     'home'
-  //     ':assetId',
-  //     'xyz'
-  //   ]
-  // }
-
-  // /home (:id)
+export default (input, mapping) => {
+  mapping = { ...defaultMapping, ...mapping }
+  return remapInput(normalizeInput(input, mapping), mapping)
 }

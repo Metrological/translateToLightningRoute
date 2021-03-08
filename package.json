@@ -4,8 +4,7 @@
   "description": "Translates routes to Lightning Routes",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r esm test/**/*.js",
-    "dev": "node -r esm dev.js"
+    "test": "mocha -r esm test/**/*.js"
   },
   "author": "",
   "license": "Apache",
