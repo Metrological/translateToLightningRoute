@@ -21,7 +21,7 @@ const defaultMapping = {
   normalize: {
     launchpoint: {
       to: 'section',
-      fn: (val, deeplinkObj) => (val === 'section' ? deeplinkObj.sectionname : val),
+      fn: (val, deeplinkObj) => (val === 'section' ? deeplinkObj.sectionName : val),
     },
   },
   pathKey: 'section',
@@ -31,7 +31,7 @@ const defaultMapping = {
     playback: '/page/player/:assetId',
     search: '/search/:query?',
   },
-  queryStringsToIgnore: ['section', 'sectionname'],
+  queryStringsToIgnore: ['section', 'sectionName'],
 }
 
 const normalizeInput = (input, mapping) => {

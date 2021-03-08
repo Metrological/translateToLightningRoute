@@ -35,11 +35,11 @@ describe('parse method', () => {
   })
 
   it('should parse just a querystring to an object', () => {
-    const input = '?launchpoint=section&sectionname=search'
+    const input = '?launchpoint=section&sectionName=search'
 
     const expected = {
       launchpoint: 'section',
-      sectionname: 'search',
+      sectionName: 'search',
     }
     const actual = parse(input, 'querystring')
 
@@ -47,11 +47,11 @@ describe('parse method', () => {
   })
 
   it('should parse a url with a hash and a querystring to an object', () => {
-    const input = 'https://myurl.com/uri/#this-is-a-hash?launchpoint=section&sectionname=search'
+    const input = 'https://myurl.com/uri/#this-is-a-hash?launchpoint=section&sectionName=search'
 
     const expected = {
       launchpoint: 'section',
-      sectionname: 'search',
+      sectionName: 'search',
     }
     const actual = parse(input, 'querystring')
 

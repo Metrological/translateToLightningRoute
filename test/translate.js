@@ -25,7 +25,7 @@ const mapping = {
   normalize: {
     launchpoint: {
       to: 'section',
-      fn: (val, deeplinkObj) => (val === 'section' ? deeplinkObj.sectionname : val),
+      fn: (val, deeplinkObj) => (val === 'section' ? deeplinkObj.sectionName : val),
     },
   },
   pathKey: 'section',
@@ -34,7 +34,7 @@ const mapping = {
     browse: '/page/browse',
     search: '/search/:query?',
   },
-  queryStringsToIgnore: ['section', 'sectionname'],
+  queryStringsToIgnore: ['section', 'sectionName'],
 }
 
 describe('translate method', () => {
@@ -56,7 +56,7 @@ describe('translate method', () => {
   it('should translate a deeplink object to a mapped deeplink object and remap sectionName to section', () => {
     const input = {
       launchpoint: 'section',
-      sectionname: 'browse',
+      sectionName: 'browse',
     }
 
     const expected = {
@@ -71,7 +71,7 @@ describe('translate method', () => {
   it('should translate a deeplink object to a mapped deeplink object and remap sectionName to section', () => {
     const input = {
       launchpoint: 'section',
-      sectionname: 'search',
+      sectionName: 'search',
       query: 'katy%20perry',
     }
 
@@ -87,7 +87,7 @@ describe('translate method', () => {
   it('should support optional path parts', () => {
     const input = {
       launchpoint: 'section',
-      sectionname: 'search',
+      sectionName: 'search',
     }
 
     const expected = {
@@ -102,7 +102,7 @@ describe('translate method', () => {
   it('should fallback on the default mapping', () => {
     const input = {
       launchpoint: 'section',
-      sectionname: 'search',
+      sectionName: 'search',
     }
 
     const expected = {
@@ -117,7 +117,7 @@ describe('translate method', () => {
   it('should merge the custom mapping with the default mapping', () => {
     const input = {
       launchpoint: 'section',
-      sectionname: 'search',
+      sectionName: 'search',
     }
 
     const customMapping = {
@@ -128,7 +128,7 @@ describe('translate method', () => {
     }
 
     const expected = {
-      queryParams: { sectionname: 'search' },
+      queryParams: { sectionName: 'search' },
       path: '/mysearch',
     }
 
