@@ -17,47 +17,6 @@
  * limitations under the License.
  */
 
-import { parse, translate, output } from './src'
+import translator from './src/translator'
 
-const defaultMapping = {
-  default: 'Home',
-  remap: {
-    launchpoint: (val, deeplinkObj) => {
-      val === 'section' ? deeplinkObj.sectionName : val
-    },
-  },
-  sections: {
-    home: '/pages/home',
-    player: '/playingmodule',
-    bla: () => {},
-  },
-  inputVariables: ['query', ['assetType', 'assetId'], 'entityId'],
-}
-
-//https://www.tvapp.com/x1?launchpoint=home&lmt=0&us_privacy=1-N-
-//https://www.tvapp.com/x1?launchpoint=section&lmt=0&us_privacy=1-N-&sectionName=home
-//--> /home?(params)
-
-//https://www.tvapp.com/x1?launchpoint=section&lmt=0&us_privacy=1-N-&sectionName=settings
-//--> /settings
-
-export default async (
-  hashOrObject,
-  config = {
-    inputFormat: 'querystring',
-    outputFormat: 'url',
-    mapping: { ...defaultMapping },
-  }
-) => {
-  const deepLinkObject = await parse(hashOrObject, config.inputFormat)
-  const mappedDeeplinkObject = await translate(deepLinkObject, config.mapping)
-  return await output(mappedDeeplinkObject, config.outputFormat)
-}
-
-// #/pages/:sectionName
-
-// {
-//     id: xx,
-//     video: asd,
-//     title: asdas
-// }
+export default translator

@@ -17,16 +17,17 @@
  * limitations under the License.
  */
 
-// import { expect } from 'chai'
+import { parse, translate, output } from '.'
 
-// import translate from '../src/translate'
-
-// export default () => {
-//   describe('translate', () => {
-//     it('should translate XYZ', (done) => {
-//       translate('?abc').then((resp) => {
-//         expect(resp).to.equal()
-//       })
-//     })
-//   })
-// }
+export default (
+  hashOrObject,
+  config = {
+    inputFormat: 'querystring',
+    outputFormat: 'hash',
+    mapping: {},
+  }
+) => {
+  const deepLinkObject = parse(hashOrObject, config.inputFormat)
+  const translatedDeepLinkObject = translate(deepLinkObject, config.mapping)
+  return output(translatedDeepLinkObject, config.outputFormat)
+}
