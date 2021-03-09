@@ -68,4 +68,15 @@ describe('output method', () => {
 
     expect(actual).to.deep.equal(input)
   })
+
+  it('should return the input when raw format is specified', () => {
+    const input = {
+      queryParams: { foo: 'bar', bla: 'bar' },
+      path: '/page/player/1234',
+    }
+
+    const actual = output(input, 'raw')
+
+    expect(actual).to.deep.equal(input)
+  })
 })

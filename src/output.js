@@ -22,8 +22,13 @@ const constructHash = (input) => {
   return encodeURI((queryString ? '?' + queryString : '') + '#' + input.path)
 }
 
+const constructRaw = (input) => {
+  return input
+}
+
 const formats = {
   hash: constructHash,
+  raw: constructRaw,
 }
 
 export default (input, format = 'hash') => {
