@@ -41,6 +41,7 @@ describe('lightning route translator', () => {
       'https://a.espncdn.com/connected-devices/espn-x1/?launchpoint=section&sectionName=search',
       'https://a.espncdn.com/connected-devices/espn-x1/?launchpoint=search&query=the%20search%20query',
       'https://a.espncdn.com/connected-devices/espn-x1/index.html?launchpoint=section&lmt=0&us_privacy=1-N-&sectionName=espnplus',
+      '?launchpoint=section&lmt=0&us_privacy=1-N-&sectionName=espnplus#/page/espnplus',
     ]
 
     const expected = [
@@ -50,6 +51,7 @@ describe('lightning route translator', () => {
       '#/pages/espnplus',
       '#/search',
       '#/search/the%20search%20query',
+      '?lmt=0&us_privacy=1-N-#/pages/espnplus',
       '?lmt=0&us_privacy=1-N-#/pages/espnplus',
     ]
 

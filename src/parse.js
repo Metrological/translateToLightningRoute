@@ -17,9 +17,10 @@
  * limitations under the License.
  */
 
-const getQueryStringParams = (qs) => {
+const getQueryStringParams = (location) => {
   const getQuery = /([?&].*)/
-  const matches = getQuery.exec(qs)
+  const hashIndex = location.indexOf('#')
+  const matches = getQuery.exec(location.substr(0, hashIndex > -1 ? hashIndex : location.length))
   const params = {}
 
   if (matches && matches.length) {

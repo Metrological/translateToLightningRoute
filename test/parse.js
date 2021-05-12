@@ -47,7 +47,7 @@ describe('parse method', () => {
   })
 
   it('should parse a url with a hash and a querystring to an object', () => {
-    const input = 'https://myurl.com/uri/#this-is-a-hash?launchpoint=section&sectionName=search'
+    const input = 'https://myurl.com/uri/?launchpoint=section&sectionName=search#this-is-a-hash'
 
     const expected = {
       launchpoint: 'section',
