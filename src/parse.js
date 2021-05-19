@@ -18,9 +18,14 @@
  */
 
 const getQueryStringParams = (location) => {
+  const locationString = location.toString()
+
   const getQuery = /([?&].*)/
-  const hashIndex = location.toString().indexOf('#')
-  const matches = getQuery.exec(location.substr(0, hashIndex > -1 ? hashIndex : location.length))
+  const hashIndex = locationString.indexOf('#')
+  const matches = getQuery.exec(
+    locationString.substr(0, hashIndex > -1 ? hashIndex : locationString.length)
+  )
+
   const params = {}
 
   if (matches && matches.length) {

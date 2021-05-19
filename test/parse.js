@@ -18,6 +18,8 @@
  */
 
 import { expect } from 'chai'
+import mockLocation from 'mock-location'
+import locationMock from 'mock-location'
 
 import parse from '../src/parse'
 
@@ -75,6 +77,20 @@ describe('parse method', () => {
 
     const expected = {}
     const actual = parse(input, 'non-existing-format')
+
+    expect(actual).to.deep.equal(expected)
+  })
+
+  it('should accept a document.location object', () => {
+    const input = mockLocation(
+      'https://myurl.com/uri/bla/foo?launchpoint=detail&entityId=abcd-12356'
+    )
+
+    const expected = {
+      launchpoint: 'detail',
+      entityId: 'abcd-12356',
+    }
+    const actual = parse(input)
 
     expect(actual).to.deep.equal(expected)
   })
